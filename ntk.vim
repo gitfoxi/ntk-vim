@@ -22,8 +22,8 @@
 " Thanks to Dejan Noveski for his article How to Write vim Plugins with Python
 " http://brainacle.com/how-to-write-vim-plugins-with-python.html
 "
-" TODO: F8 to send to mcd
-" TODO: Fix DVVC too
+" TODO: Fix DVVC and other binary commands too
+" TODO: Find send_to_mcd.py and myhpt relative to ntk.vim
 
 " Only do these settings when not done yet for this buffer
 if exists("b:did_ftplugin")
@@ -35,7 +35,26 @@ let b:did_ftplugin = 1
 
 " echo "hello ntk"
 
-" TODO: Detect 93k file based on hp93000,config,0.1 in first line
+" TODO: Detect 93k file based on hp93000,config,0.1 in first line and warn that
+" this wipes out all settings.
+
+" Get the real path of this script. Does not work inside a function so here it is at
+" top scope.
+
+let s:this_script_path = resolve(expand("<sfile>"))
+let s:this_script_directory = substitute(s:this_script_path, "[^/]*$", "", "")
+
+function! Echo_script_path()
+python << EOF
+
+import vim
+
+print vim.eval("s:this_script_directory")
+
+EOF
+
+endfunction
+
 function! s:ntk_open()
 "     echo ".ntk file detected"
     map <F8> :call NtkSendToMCD()<CR>
@@ -45,6 +64,7 @@ endfunction
 map <F8> :call NtkSendToMCD()<CR>
 
 autocmd BufNewFile,BufRead *.ntk call s:ntk_open()
+" Write automatically triggers fix EQSP
 autocmd BufWritePre *.ntk call NtkFixEQSP()
 
 
@@ -55,15 +75,10 @@ if !has('python')
 endif
 
 function! NtkSendToMCD()
-" TODO: write should automatically trigger NtkFixEQSP
+" write automatically triggers save
     write
-    echo(system("./send_to_mcd.py ".bufname("%")))
-    
-
-
-python <<EOF
-
-EOF
+" TODO: Handle missing send_to_mcd.py or unbuilt myhpt
+    echo(system(s:this_script_directory . "myhpt/send_to_mcd.py ".bufname("%")))
 endfunction
 
 function! NtkFixEQSP()
