@@ -12,7 +12,7 @@ pull in new updates. It's not recommended to put it directly under your
 
     mkdir -p ~/src
     cd ~/src
-    git clone https://github.com/gitfoxi/ntk.vim.git
+    git clone https://github.com/gitfoxi/ntk-vim.git
     mkdir -p ~/.vim/plugins
     ln -s ~/src/ntk.vim/ntk.vim ~/.vim/plugins/
 
@@ -35,7 +35,7 @@ If you run under gvim, you will get an `hp93k` menu of available commands.
 
     gvim levels/mydevice.lev
 
-![Menu Screenshot](https://raw.github.com/gitfoxi/ntk.vim/master/images/menu_screenshot.png)
+![Menu Screenshot](https://raw.github.com/gitfoxi/ntk-vim/master/images/menu_screenshot.png)
 
 ## Hacking
 
