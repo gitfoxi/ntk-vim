@@ -103,7 +103,7 @@ endfunction
 " TODO: popup an about
 :menu 100.110 h&p93k.About\ ntk\.vim :call AboutNtkVim()<CR>
 " TODO: open www.antikc.com in web browser
-:menu 100.120 h&p93k.www\.github\.com/gitfoxi/ntk\.vim :call OpenWebPage("https://www.github.com/gitfoxi/ntk-vim")<CR>
+:menu 100.120 h&p93k.www\.github\.com/gitfoxi/ntk-vim :call OpenWebPage("https://www.github.com/gitfoxi/ntk-vim")<CR>
 :menu 100.130 h&p93k.www\.aNTiKc\.com :call OpenWebPage("http://www.antikc.com")<CR>
 
 function! NtkFixEQSP()
