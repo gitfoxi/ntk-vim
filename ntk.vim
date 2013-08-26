@@ -81,6 +81,31 @@ function! NtkSendToMCD()
     echo(system(s:this_script_directory . "myhpt/send_to_mcd.py ".bufname("%")))
 endfunction
 
+function! AboutNtkVim()
+    echo "ntk.vim Copyright (c) 2013 Michael Fox and licensed under The MIT License "
+endfunction
+
+function! OpenWebPage(url)
+    if filereadable("/usr/bin/firefox")
+        silent! execute "!/usr/bin/firefox \"" . a:url . "\""
+    elseif filereadable("/usr/bin/mozilla")
+        silent! execute "!/usr/bin/mozilla \"" . a:url . "\""
+    elseif filereadable("/usr/bin/xdg-open")
+        silent! execute "!/usr/bin/xdg-open \"" . a:url . "\""
+    else
+        echo "ERROR: No browser in /usr/bin/firefox or /usr/bin/mozilla"
+    endif
+endfunction
+
+" Menu for gvim
+:menu 100.1 h&p93k.&Send\ File\ To\ hp93k<Tab>F8 :call NtkSendToMCD()<CR>
+:menu 100.100 h&p93k.-sep1- :
+" TODO: popup an about
+:menu 100.110 h&p93k.About\ ntk\.vim :call AboutNtkVim()<CR>
+" TODO: open www.antikc.com in web browser
+:menu 100.120 h&p93k.www\.github\.com/gitfoxi/ntk\.vim :call OpenWebPage("https://www.github.com/gitfoxi/ntk.vim")<CR>
+:menu 100.130 h&p93k.www\.aNTiKc\.com :call OpenWebPage("http://www.antikc.com")<CR>
+
 function! NtkFixEQSP()
 
 python << EOF

@@ -29,6 +29,14 @@ When a new version is available:
 
 Make your edits then press [F8] to download.
 
+## GUI
+
+If you run under gvim, you will get an `hp93k` menu of available commands.
+
+    gvim levels/mydevice.lev
+
+![Menu Screenshot](https://raw.github.com/gitfoxi/ntk.vim/master/images/menu_screenshot.png)
+
 ## Hacking
 
 Under `ntk.vim/myhpt` you'll find two useful programs:
@@ -102,3 +110,26 @@ If it says:
 
 Then you have a problem. Remember to use `vim` and not `vi` because `vi` starts
 a retarded version of Vim.
+
+## License
+
+The MIT License (MIT)
+
+Copyright (c) 2013 Michael Fox
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+

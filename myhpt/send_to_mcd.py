@@ -242,6 +242,8 @@ But instead it is:
 
 def file_is_newer(file_newer, file_older):
     """Return true if file_newer is actually newer than file_older"""
+    if not exists(file_newer) or not exists(file_older):
+        return False
     return getctime(file_newer) > getctime(file_older)
 
 
@@ -253,7 +255,7 @@ def make_myhpt():
         chdir(dirname(myhpt))
         r = call(["make", "clean", "all"])
         if r != 0:
-            stderr.write("ERROR: send_to_mcd.py failed to 'make clean all' myhpt")
+            stderr.write("ERROR: send_to_mcd.py failed to 'make clean all' myhpt in " + dirname(myhpt )+ "\n")
             exit(1)
         chdir(working_dir)
 
