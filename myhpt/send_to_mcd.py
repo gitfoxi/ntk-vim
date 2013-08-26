@@ -28,8 +28,8 @@
 from sys import stderr, argv, exit
 from re import match, search, compile
 from subprocess import call
-from os import popen, getcwd
-from os.path import normpath
+from os import popen, getcwd, chdir, curdir
+from os.path import normpath, realpath, dirname, exists, abspath, getctime
 
 usage_string = """
 Usage:
@@ -64,7 +64,7 @@ def try_send_fw_file(fw_file):
         pass
     else:
         fwf.close()
-        call(["./myhpt", fw_file])
+        call([myhpt, fw_file])
 
 def get_working_path(filename):
     """Take a filename and return a path sufficient for appending relative
@@ -237,7 +237,25 @@ But instead it is:
     if file_type == "pattern_master_file":
         do_pattern_master_file(filename)
     else:
-        send_file_and_pre_post(filename)
+        send_file_and_pre_post(filename, file_type)
+
+
+def file_is_newer(file_newer, file_older):
+    """Return true if file_newer is actually newer than file_older"""
+    return getctime(file_newer) > getctime(file_older)
+
+
+def make_myhpt():
+    """Rebuild myhpt if myhpt.c has been modified or if myhpt isn't there"""
+    myhpt_c = dirname(myhpt) + "/myhpt.c"
+    if not exists(myhpt) or not file_is_newer(myhpt, myhpt_c):
+        working_dir = abspath(curdir)
+        chdir(dirname(myhpt))
+        r = call(["make", "clean", "all"])
+        if r != 0:
+            stderr.write("ERROR: send_to_mcd.py failed to 'make clean all' myhpt")
+            exit(1)
+        chdir(working_dir)
 
 
 if(len(argv) != 2):
@@ -245,5 +263,7 @@ if(len(argv) != 2):
     exit(1)
 
 filename = argv[1]
+myhpt = dirname(realpath(argv[0])) + "/myhpt"
+make_myhpt()
 
 send_file(filename)

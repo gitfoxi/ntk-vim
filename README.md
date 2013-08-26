@@ -13,8 +13,6 @@ pull in new updates. It's not recommended to put it directly under your
     mkdir -p ~/src
     cd ~/src
     git clone https://github.com/gitfoxi/ntk.vim.git
-    cd ntk.vim
-    make all
     mkdir -p ~/.vim/plugins
     ln -s ~/src/ntk.vim/ntk.vim ~/.vim/plugins/
 
@@ -24,7 +22,6 @@ When a new version is available:
 
     cd ~/src/ntk.vim
     git pull
-    make clean all
 
 ## Usage
 
