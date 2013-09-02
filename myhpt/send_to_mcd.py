@@ -23,7 +23,6 @@
 # or different license configurations. This is most concerning for Pin
 # Configuration.
 #
-# TODO: Command-line option to limit debug output
 
 from sys import stderr, argv, exit
 from re import match, search, compile
@@ -52,7 +51,6 @@ def open_compressed(filename):
         exit(1)
     return f
 
-# TODO: How to find the path for these files?
 def try_send_fw_file(fw_file):
     """Send a fw file to the mcd pipe if the file exists
     """

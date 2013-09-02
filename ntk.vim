@@ -22,8 +22,6 @@
 " Thanks to Dejan Noveski for his article How to Write vim Plugins with Python
 " http://brainacle.com/how-to-write-vim-plugins-with-python.html
 "
-" TODO: Fix DVVC and other binary commands too
-" TODO: Find send_to_mcd.py and myhpt relative to ntk.vim
 
 " Only do these settings when not done yet for this buffer
 if exists("b:did_ftplugin")
@@ -34,9 +32,6 @@ endif
 let b:did_ftplugin = 1
 
 " echo "hello ntk"
-
-" TODO: Detect 93k file based on hp93000,config,0.1 in first line and warn that
-" this wipes out all settings.
 
 " Get the real path of this script. Does not work inside a function so here it is at
 " top scope.
@@ -100,9 +95,7 @@ endfunction
 " Menu for gvim
 :menu 100.1 h&p93k.&Send\ File\ To\ hp93k<Tab>F8 :call NtkSendToMCD()<CR>
 :menu 100.100 h&p93k.-sep1- :
-" TODO: popup an about
 :menu 100.110 h&p93k.About\ ntk\.vim :call AboutNtkVim()<CR>
-" TODO: open www.antikc.com in web browser
 :menu 100.120 h&p93k.www\.github\.com/gitfoxi/ntk-vim :call OpenWebPage("https://www.github.com/gitfoxi/ntk-vim")<CR>
 :menu 100.130 h&p93k.www\.aNTiKc\.com :call OpenWebPage("http://www.antikc.com")<CR>
 
@@ -115,16 +108,9 @@ import re
 in_eqsp = False
 find_eqsp = re.compile('^(EQSP\s+[^,\s]+\s*,\s*[^,\s]+\s*,\s*#9)(\d{9})(.*)',re.DOTALL)
 
-# TODO: If download errors then jump back to the line the error occurs on
-# TODO: Split into several buffers, one for each EQSP section, fixing it up on write or download
-# TODO: Transform vector files for editing (will require VECC reverse engineering)
-# TODO: Transform testflows into python and back
-# TODO: Menus in gvim
-# Use autocommands (autocmd) to hook reading and writing
 
 def in_quote(s):
     return s.count('"') % 2 == 1
-
             
 for i, l in enumerate(vim.current.buffer):
     if not in_eqsp:

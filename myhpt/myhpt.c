@@ -100,13 +100,9 @@ int main(int argc, char* argv[])
         exit(1);
     }
 
-    // TODO: if this fails, somehow just return an error instead of crash dumping
-    // This is so we can gracefully handle the case where smarTest is not running.
     HpInit();
 
-    // TODO: Don't have a fixed size for the task string because it could be very
-    // large, for example, EQSP
-    char *task_str;  //[65535];
+    char *task_str;
     char answ_str[65535];  // TODO: What is maximum answ_str length?
     INT32 task_len, answ_len, ret_state;
     char *bindata_start;
@@ -115,18 +111,11 @@ int main(int argc, char* argv[])
     char bindata_clen[10];
     int read_len;
 
-//    printf("Command: ");
-    // TODO: Some way to exit properly like EOF. But will this conflict with being
-    // able to send binary data? May have to encode binary data.
     while(!feof(fin)) {
         answ_len = sizeof(answ_str);
-        // TODO: If someone just hits enter on a blank line, will this fail?
-        // TODO: Do something with er
-        // fgets stops after reading EOF or newline so definitely need to encode '0' and '\n'
         task_str = NULL;  // getline will allocate
         n = 0;
         task_len = getline(&task_str, &n, fin);
-//        printf("got line: %s", task_str);
         if(task_len <= 0) {
             // EOF: Shutdown
             exit(0);

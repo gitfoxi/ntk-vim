@@ -27,7 +27,7 @@ When a new version is available:
 
     vim timing/mydevice.tim
 
-Make your edits then press [F8] to download.
+Make your edits then press **F8** to download.
 
 ## GUI
 
@@ -82,12 +82,12 @@ commands should go before loading a configuration file, start logging firmware
 commands:
 
     /opt/hp93000/soc/pws/bin/hpt
-    *task:* diag 2
+    task: diag 2
 
 `diag 2` starts firmware logging. Then load your configuration file. Then in at
 the `hpt` *task:* prompt:
 
-    *task:* diag -2
+    task: diag -2
 
 `diag -2` stops logging. Now open up `/var/opt/hp93000/soc/MCDLog` and do some
 research!
